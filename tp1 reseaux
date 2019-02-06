@@ -1,0 +1,100 @@
+1.1. Physique et Liaison de Données
+
+	1) Combien y a-t-il de stations dans cette salle ?
+
+	18
+
+	2) Combien de cartes réseaux comportent votre station ?
+
+	
+
+	3) Que signifie l'indicateur lumineux ?
+
+	
+
+	4) Combien de connecteurs électriques présente une fiche RJ45 ?
+
+	8
+
+	5) Qu'y a-t-il à l'autre extrémité du câble ?
+
+	une autre fiche RJ45
+
+	6) La salle contient-elle d'autre matériel réseaux ?
+
+	Un switch 
+
+1.2. Paramètres Réseaux
+
+	7) Quelle(s) commande(s) et utilitaire(s) existe(nt) pour 	connaître les paramètres réseaux de votre station ?
+
+	Ifconfig -a
+
+    8) Quelles sont les adresses IP de votre station ?
+
+	195.221.218.185
+	
+    9) A quel(s) sous-réseau(x) appartiennent les stations de votre salle ?
+
+	195.221.218.0
+
+    10) Combien y a-t-il d'adresses dans ces réseaux ?
+
+	254
+
+    11) Comment pouvez-vous le savoir ?
+
+
+
+2.1. Protocole Applicatif SMTP
+
+	1) Rappeler à quoi sert le protocole applicatif SMTP.
+
+	protocole de communication utilisé pour transférer le courrier électronique (courriel) vers les serveurs de messagerie électronique. 
+
+	2) On considère une session complète. Expliquer ce qui se passe.
+
+	
+
+2.2. Analyse
+
+	1) Rappeler pour quelles raisons vous ne pouvez pas capturer de trafic réseau en salle de TP.
+
+	Télécharger l'extrait de la session SMTP en binaire (ie capturé sur le réseau).
+
+	Ouvrir avec un éditeur hexadécimal (comme hexedit). Que constatez-vous ?
+
+	Ouvrir avec wireshark, et, en utilisant la fenêtre d'analyse (milieu), déterminer pour chaque paquet les caractéristiques de niveau 3 et 4:
+
+    version IP
+	
+    adresse source (en hexadécimal et en notation pointée)
+	147.210.33.133
+    adresse destination (en hexadécimal et en notation pointée)
+	192.168.1.130
+    port source
+	25
+    port destination
+	41585
+
+	A quelle partie de la session complète, cet extrait correspond-t-il ? 
+
+	au début
+
+
+
+3.1.1
+
+	Erreur : moved permanently, document plus au meme endroit
+
+3.1.2
+
+	Apache v2.4.6
+
+	Memes erreurs mais serveur : apache v2.4.25
+	
+
+3.2
+	
+	Si on écrit dans un terminal, ça écrit dans l'autre 
+
