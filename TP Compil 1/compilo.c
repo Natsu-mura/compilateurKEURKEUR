@@ -27,7 +27,7 @@ void test_yylex(FILE *yyin) {
 void affiche_message_aide(char *nom_prog) {
   fprintf(stderr, "usage: %s OPT fichier_source\n", nom_prog);
   fprintf(stderr, "\t-l affiche les tokens de l'analyse lexicale\n");
-  /*fprintf(stderr, "\t-s affiche l'arbre de derivation\n");*/
+  fprintf(stderr, "\t-s affiche l'arbre de derivation\n");
   fprintf(stderr, "\t-a affiche l'arbre abstrait\n");
   fprintf(stderr, "\t-t affiche la table des symboles\n");
   fprintf(stderr, "\t-3 affiche le code trois adresses\n");   
@@ -46,6 +46,7 @@ int main(int argc, char **argv) {
   int affiche_mips = 0;
   int affiche_nasm = 0;
   int affiche_tabsymb = 0;  
+  int affiche_syntaxe = 0;
 
   if(argc == 1){
     affiche_message_aide(argv[0]);
@@ -55,9 +56,9 @@ int main(int argc, char **argv) {
     if(!strcmp(argv[i], "-l")) {
        affiche_lex = 1;
     }
-    /*else if(!strcmp(argv[i], "-s")) {
+    else if(!strcmp(argv[i], "-s")) {
        affiche_syntaxe = 1;
-    }*/
+    }
     else if(!strcmp(argv[i], "-a")) {
        affiche_syntaxe_abstraite = 1;
     }
@@ -81,7 +82,7 @@ int main(int argc, char **argv) {
       }
     }
   }
-  
+
   if( !( affiche_lex || affiche_syntaxe_abstraite || affiche_code3a || 
       affiche_tabsymb || affiche_mips ) ) {
     affiche_nasm = 1; /* Par défaut, affiche code cible NASM */
@@ -89,8 +90,7 @@ int main(int argc, char **argv) {
   
   if(affiche_lex == 1) {
     test_yylex( yyin );    
-  }  
-  //yyparse();  
+  }    
   if( affiche_syntaxe_abstraite ) {
     //Affiche arbre abstrait
   }
@@ -103,6 +103,9 @@ int main(int argc, char **argv) {
   if(affiche_nasm){
     //Affiche code cible NASM
   }
+	if(affiche_syntaxe == 1){
+		yyparse();
+	}
   return 0;
 } 
 

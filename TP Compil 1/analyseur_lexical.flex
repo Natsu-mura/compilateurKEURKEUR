@@ -4,7 +4,7 @@
 %{
 /* code copié AU DÉBUT de l'analyseur */
 
-#include "symboles.h"
+#include "analyseur_syntaxique.tab.h"
 %}
 %option yylineno
 %option nounput
@@ -24,15 +24,13 @@ alphanum {lettre}|{chiffre}
 "faire"	{ return FAIRE; }
 "tantque"	{ return TANTQUE; }
 "retour"	{ return RETOUR; }
-"lire"		{ return LIRE; }
-"ecrire" 	{ return ECRIRE; }
 ({lettre}|"$"|"_")(({alphanum}|"$"|"_")*) {return IDENTIF;}
 "#".*\n { /* ignore les commentaires */ }
 
 
 [0-9]+ 	{ return NOMBRE; }
 [ \t]  	{ /* ignore les blancs et tabulations */ }
-\n    	{ yylineno++;}
+\n    	{}
 "." 	{ return yytext[0]; }
 "," 	{ return VIRGULE; }
 ";"		{ return POINT_VIRGULE; }
@@ -70,9 +68,9 @@ int yywrap(){
  * afficher des messages d'erreur et l'arbre XML 
  **********************************************************************/
 
-char *tableMotsClefs[] = {"si", "alors", "sinon", "tantque", "faire", "entier", "retour", "lire", "ecrire"};
-int codeMotClefs[] = {SI, ALORS, SINON, TANTQUE, FAIRE, ENTIER, RETOUR, LIRE, ECRIRE};
-int nbMotsClefs = 9;
+char *tableMotsClefs[] = {"si", "alors", "sinon", "tantque", "faire", "entier", "retour"};
+int codeMotClefs[] = {SI, ALORS, SINON, TANTQUE, FAIRE, ENTIER, RETOUR};
+int nbMotsClefs = 7;
 
 void nom_token( int token, char *nom, char *valeur ) {
   int i;    
