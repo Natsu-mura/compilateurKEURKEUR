@@ -4,6 +4,7 @@
 %{
 /* code copié AU DÉBUT de l'analyseur */
 
+#include "syntabs.h"
 #include "analyseur_syntaxique.tab.h"
 %}
 %option yylineno
@@ -24,11 +25,11 @@ alphanum {lettre}|{chiffre}
 "faire"	{ return FAIRE; }
 "tantque"	{ return TANTQUE; }
 "retour"	{ return RETOUR; }
-({lettre}|"$"|"_")(({alphanum}|"$"|"_")*) {return IDENTIF;}
+({lettre}|"$"|"_")(({alphanum}|"$"|"_")*) {yylval.sval = strdup(yytext); return IDENTIF;}
 "#".*\n { /* ignore les commentaires */ }
 
 
-[0-9]+ 	{ return NOMBRE; }
+[0-9]+ 	{ yylval.dval = atof(yytext); return NOMBRE; }
 [ \t]  	{ /* ignore les blancs et tabulations */ }
 \n    	{}
 "." 	{ return yytext[0]; }

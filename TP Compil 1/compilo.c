@@ -3,9 +3,13 @@
 #include <string.h>
 
 #include "analyseur_lexical_flex.h"
+#include "syntabs.h" // pour syntaxe abstraite
+#include "analyseur_syntaxique.tab.h"
+#include "affiche_arbre_abstrait.h"
 
 FILE *yyin;
 extern char *yytext;   // déclaré dans analyseur_lexical
+n_prog *n;
 
 /***********************************************************************
  * Fonction auxiliaire appelée par le compilo en mode -l pour tester 
@@ -82,30 +86,33 @@ int main(int argc, char **argv) {
       }
     }
   }
-
-  if( !( affiche_lex || affiche_syntaxe_abstraite || affiche_code3a || 
-      affiche_tabsymb || affiche_mips ) ) {
-    affiche_nasm = 1; /* Par défaut, affiche code cible NASM */
-  }
   
-  if(affiche_lex == 1) {
-    test_yylex( yyin );    
-  }    
-  if( affiche_syntaxe_abstraite ) {
-    //Affiche arbre abstrait
-  }
-  if(affiche_code3a){
-  	//Affiche code 3a 
-  }  
-  if(affiche_tabsymb){
-    //Affiche table de symboles
-  }
-  if(affiche_nasm){
-    //Affiche code cible NASM
-  }
-	if(affiche_syntaxe == 1){
+	if(affiche_syntaxe){
 		yyparse();
 	}
+	
+	if( !( affiche_lex || affiche_syntaxe_abstraite || affiche_code3a || 
+	  affiche_tabsymb || affiche_mips ) ) {
+	affiche_nasm = 1; /* Par défaut, affiche code cible NASM */
+	}
+
+	if(affiche_lex == 1) {
+	test_yylex( yyin );    
+	} 
+	if( affiche_syntaxe_abstraite ) {
+	printf("n_prog: %p \n", n);
+	affiche_n_prog(n);
+	}
+	if(affiche_code3a){
+	//Affiche code 3a 
+	}  
+	if(affiche_tabsymb){
+	//Affiche table de symboles
+	}
+	if(affiche_nasm){
+	//Affiche code cible NASM
+	}
+
   return 0;
 } 
 
