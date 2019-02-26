@@ -25,6 +25,8 @@ alphanum {lettre}|{chiffre}
 "faire"	{ return FAIRE; }
 "tantque"	{ return TANTQUE; }
 "retour"	{ return RETOUR; }
+"lire"	{return LIRE; }
+"ecrire" {return ECRIRE; }
 ({lettre}|"$"|"_")(({alphanum}|"$"|"_")*) {yylval.sval = strdup(yytext); return IDENTIF;}
 "#".*\n { /* ignore les commentaires */ }
 
@@ -50,7 +52,6 @@ alphanum {lettre}|{chiffre}
 "&" 	{ return ET; }
 "|"		{ return OU; }
 "!"		{ return NON; }
-
 "/*" BEGIN COMM;
 <COMM>. ;
 <COMM>\n ;
@@ -69,9 +70,9 @@ int yywrap(){
  * afficher des messages d'erreur et l'arbre XML 
  **********************************************************************/
 
-char *tableMotsClefs[] = {"si", "alors", "sinon", "tantque", "faire", "entier", "retour"};
-int codeMotClefs[] = {SI, ALORS, SINON, TANTQUE, FAIRE, ENTIER, RETOUR};
-int nbMotsClefs = 7;
+char *tableMotsClefs[] = {"si", "alors", "sinon", "tantque", "faire", "entier", "retour","lire","ecrire"};
+int codeMotClefs[] = {SI, ALORS, SINON, TANTQUE, FAIRE, ENTIER, RETOUR,LIRE,ECRIRE};
+int nbMotsClefs = 9;
 
 void nom_token( int token, char *nom, char *valeur ) {
   int i;    

@@ -51,11 +51,13 @@ double dval;
 %token ET
 %token OU
 %token NON
+%token LIRE
+%token ECRIRE
 
 
 %type <n_prog> programme
 
-%type <n_instr> iAffect iSi iTantQue iAppel iRetour inst iBloc sinonOpt
+%type <n_instr> iAffect iSi iTantQue iAppel iRetour inst iBloc sinonOpt iEcrire
 %type <n_l_instr> listInst
 
 %type <n_exp> expression expression1 expression2 expression3 expression4 expression5 expression6
@@ -98,7 +100,8 @@ inst : iAffect {$$ = $1;}
 	| iSi {$$ = $1;}
 	| iTantQue {$$ = $1;}
 	| iAppel {$$ = $1;}
-	| iRetour {$$ = $1;};
+	| iRetour {$$ = $1;}
+	| iEcrire {$$ = $1;};
 
  
 iAffect : var EGAL expression POINT_VIRGULE {$$ = cree_n_instr_affect($1, $3);};
@@ -108,6 +111,7 @@ sinonOpt : SINON iBloc {$$ = $2;}
 iTantQue : TANTQUE expression FAIRE iBloc {$$ = cree_n_instr_tantque($2, $4);};
 iAppel : appelFct POINT_VIRGULE {$$ = cree_n_instr_appel($1);};
 iRetour : RETOUR expression POINT_VIRGULE {$$ = cree_n_instr_retour($2);};
+iEcrire : ECRIRE PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE POINT_VIRGULE {$$ = cree_n_instr_ecrire($3);};
 appelFct : IDENTIF PARENTHESE_OUVRANTE listExpression PARENTHESE_FERMANTE {$$ = cree_n_appel($1, $3);};
 
 
@@ -135,7 +139,8 @@ expression5 : NON expression5 {$$ = cree_n_exp_op(non, $2, NULL);}
 expression6 : PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE {$$ = ($2);}
 	| var {$$ = cree_n_exp_var($1);}
 	| NOMBRE {$$ = cree_n_exp_entier($1);}
-	| appelFct {$$ = cree_n_exp_appel($1);};
+	| appelFct {$$ = cree_n_exp_appel($1);}
+	| LIRE PARENTHESE_OUVRANTE PARENTHESE_FERMANTE {$$ = cree_n_exp_lire();};
 
 
 var : IDENTIF {$$ = cree_n_var_simple($1);}
