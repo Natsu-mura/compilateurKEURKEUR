@@ -3,6 +3,7 @@
 
 #include "syntabs.h"
 
+
 void parcours_n_prog(n_prog *n);
 
 #endif

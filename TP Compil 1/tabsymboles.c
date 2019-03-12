@@ -13,7 +13,7 @@ tabsymboles_ tabsymboles;
   * Fonction qui bascule table globale -> table locale. À appeler lors qu'on
   * parcourt une déclaration de fonction, juste avant la liste d'arguments.
   * ATTENTION : après avoir traité les arguments, votre programme doit modifier
-  * __excplicitement___ la valeu de `portee` pour stocker les var. locales avec
+  * __excplicitement___ la valeur de `portee` pour stocker les var. locales avec
   * la portée P_VARIABLE_LOCALE
   */
 void entreeFonction(void){

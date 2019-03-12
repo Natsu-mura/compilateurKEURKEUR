@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "syntabs.h"
 #include "symboles.h"
 #include "util.h"
 #include "analyseur_lexical_flex.h"
@@ -34,9 +35,9 @@ void erreur(char *message) {
  * argument s
  ******************************************************************************/
 void warning_1s(char *message, char *s) {
-  fprintf (stderr, "WARNING ligne %d : ", yylineno);
-  fprintf( stderr, message, s );
-  fprintf( stderr, "\n" );
+  fprintf (stderr, "[WARNING] ligne %d : ", yylineno);
+  fprintf (stderr, "%s pour: ", message);
+  fprintf (stderr, "%s\n", s);
 }
 
 /*******************************************************************************
@@ -45,9 +46,9 @@ void warning_1s(char *message, char *s) {
  * argument s, puis quitte l'exécution du compilateur.
  ******************************************************************************/
 void erreur_1s(char *message, char *s) {
-  fprintf( stderr, "Ligne %d : ", yylineno );
-  fprintf( stderr, message, s );
-  fprintf( stderr, "\n" );
+  fprintf( stderr, "[\033[31mERROR\033[00m] ligne %d : ", yylineno );
+  fprintf (stderr, "%s pour: ", message);
+  fprintf (stderr, "%s\n", s);
   exit(1);
 }
 
@@ -162,4 +163,16 @@ void affiche_feuille(int uc, int trace_xml) {
   char nom[100], valeur[100];
   nom_token( uc, nom, valeur );
   affiche_element( nom, valeur, trace_xml );
+}
+
+/*******************************************************************************
+ * compte le nombre de parametres d'une fonction 
+ *
+ *
+ ******************************************************************************/
+int numberParam(n_l_dec* param){
+    if(param == NULL){
+        return 0;    
+    }
+    return 1+numberParam(param->queue);
 }

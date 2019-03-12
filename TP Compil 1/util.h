@@ -1,6 +1,8 @@
 #ifndef __UTIL__
 #define __UTIL__
 
+#include "syntabs.h"
+
 char *duplique_chaine(char *s);
 void warning(char *message);
 void erreur(char *message);
@@ -13,5 +15,6 @@ void affiche_feuille(int uc, int trace_xml);
 void affiche_xml_texte(char *texte_, int trace_xml);
 void consommer( int c, int *uc, int trace_xml );
 void test_yylex_internal(FILE *yyin);
+int numberParam(n_l_dec* param);
 
 #endif
